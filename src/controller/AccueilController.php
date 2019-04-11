@@ -12,6 +12,6 @@ class AccueilController extends Controller
     public function index() {
         $this->view->assign('fermes','fsdhfksjdfdsf');
         $this->view->assign('resutl','fsdhfksjdfdsf');
-        return $this->view->load("accueil");
+        return $this->view->load("accueil/index");
     }
 }

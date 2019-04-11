@@ -5,7 +5,7 @@
  * Date: 10/04/2019
  * Time: 12:18
  */
-namespace model;
+namespace src\model;
 use config\Model;
 class FermeDao extends Model
 {

@@ -22,7 +22,7 @@ class Router
                 $url = explode('/', filter_var($_GET['url'], FILTER_SANITIZE_URL));
                 //ex : localhost/nomProjet/user => $url[0] = user
                 $controller_class = ucfirst($url[0])."Controller";
-                $controller_file = "controller/".$controller_class.".php";
+                $controller_file = "src/controller/".$controller_class.".php";
                 // ON VERIFIE SI LE FICHIER EXISTE
                 if (file_exists($controller_file)) {
                     require_once $controller_file;
@@ -42,13 +42,16 @@ class Router
                         $this->controller_object->$method($url[2]);
                        }
                        else {
-                            throw new \Exception("Error parametre ! ");
+                            throw new \Exception("Error parameter ! ");
                             // A COMPLETER => REDIRECTION VERS UNE PAGE D'ERREUR 404
                        }
                     }
                     //ON VERIFIE SI $url[1] EXISTE => LA METHODE A EXECUTER ex : getAll
                     // METHODE SANS PARAMETRE
                     else if (isset($url[1])) {
+                        if($url[1] == ""){
+                            $url[1] = "getAll";
+                        }
                         //ex : localhost/nomProjet/user/getAll => $url[1] = getAll
                         $method = $url[1];
                         // ON VERIFIE SI LA METHODE getAll() EXISTE DANS LE CONTROLLER UserController
@@ -68,7 +71,7 @@ class Router
                 }
             }
             else {
-                require_once "controller/AccueilController.php";
+                require_once "src/controller/AccueilController.php";
                 $this->controller_object = new \AccueilController();
                 $this->controller_object->index();
             }
@@ -76,7 +79,7 @@ class Router
         catch(\Exception $e) {
             // ON CAPTE LES ERREURS
             // ON APPEL UNE PAGE D'ERREUR not found 404.php
-            require_once "controller/ErrorHTTPController.php";
+            require_once "src/controller/ErrorHTTPController.php";
             $this->controller_object = new \ErrorHTTPController();
             $this->controller_object->errorHttp();
         }

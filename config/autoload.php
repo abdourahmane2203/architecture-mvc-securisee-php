@@ -16,11 +16,11 @@ class Autoloader
         //$file_namespace, CONCERNE LES NAMESPACE
        try {
            $file_namespace = str_replace("\\", "/", $class.".php");
-           if (file_exists("model/".$class.".php")) {
-               require_once "model/".$class.".php";
+           if (file_exists("src/model/".$class.".php")) {
+               require_once "src/model/".$class.".php";
            }
-           else if (file_exists("controller/".$class.".php")){
-               require_once "controller/".$class.".php";
+           else if (file_exists("src/controller/".$class.".php")){
+               require_once "src/controller/".$class.".php";
            }
            // NAMESPACE
            if (file_exists($file_namespace)) {
@@ -34,7 +34,7 @@ class Autoloader
            }
        }
        catch (Exception $e) {
-           require_once "controller/ErrorHTTPController";
+           require_once "src/controller/ErrorHTTPController.php";
        }
     }
 }
